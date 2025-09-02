@@ -6,12 +6,6 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { name, email, password } = body;
     try {
-        const client = await pool.connect();
-        await client.query('SELECT 1');
-        client.release();
-
-        console.log('Database connected!');
-        
         const result = await pool.query(
             'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING password, name, email',
             [name, email, password]
