@@ -25,7 +25,7 @@ export async function GET() {
             []
         );
 
-        const existingUsers: User[] = result.rows[0];
+        const existingUsers: User[] = result.rows;
         return NextResponse.json(existingUsers, { status: 201 });
     } catch (error) {
         return NextResponse.json({ error: 'Failed to get all users', details: (error as Error).message }, { status: 500 });
