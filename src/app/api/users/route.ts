@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const { name, email, password } = body;
     try {
         const result = await pool.query(
-            'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *',
+            'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *;',
             [name, email, password]
         );
 
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 export async function GET() {
     try {
         const result = await pool.query(
-            'SELECT * FROM users RETURNING *',
+            'SELECT * FROM users;',
             []
         );
 
