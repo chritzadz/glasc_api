@@ -22,6 +22,6 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({ status: 201 });
     } catch (error) {
-        return NextResponse.json({ error: 'Failed to create user', details: (error as Error).message }, { status: 500 });
+        return NextResponse.json({ error: 'Failed posting personal details', details: (error as Error).message }, { status: 500 });
     }
 }
