@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { User } from '@/types/user';
 import { SkinConcerns  } from '@/types/skinConcerns';
 import pool from '@/app/db/db';
 import { SkinGoals } from '@/types/SkinGoals';
