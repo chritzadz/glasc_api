@@ -5,6 +5,7 @@ import { SkinGoals } from '@/types/SkinGoals';
 
 export async function POST(request: NextRequest) {
     const body = await request.json();
+    console.log();
     const { user_id, birth_date, gender, skin_type, allergies, exercise_frequency, sleep_duration, climate, sun_exposure } = body;
     const { skin_concerns }: { skin_concerns: SkinConcerns } = body;
     const { skin_goals }: {skin_goals: SkinGoals} = body;
@@ -12,7 +13,7 @@ export async function POST(request: NextRequest) {
     try {
         await pool.query(
             `INSERT INTO personal_details (user_id, birth_date, gender, skin_type, acne, wrinkles, sensitivity, dryness, dark_spots, allergies, exercise_frequency, sleep_duration, climate, sun_exposure, clear_skin, even_skin_tone, hydration,
-            anti_aging, firmness, radiance, minimized_pores, sun_protection, soothing_sensitivity) 
+            anti_aging, firmness, radiance, minimized_pores, sun_protection, soothing_sensitivity)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23) RETURNING *`,
             [user_id, birth_date, gender, skin_type, skin_concerns.acne, skin_concerns.wrinkles, skin_concerns.sensitivity,
                 skin_concerns.dryness, skin_concerns.dark_spots, allergies, exercise_frequency, sleep_duration, climate, sun_exposure,
@@ -22,6 +23,20 @@ export async function POST(request: NextRequest) {
         );
 
         return NextResponse.json({ status: 201 });
+    } catch (error) {
+        return NextResponse.json({ error: 'Failed posting personal details', details: (error as Error).message }, { status: 500 });
+    }
+}
+
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+    const userId = params.id;
+    try {
+        const task = await pool.query(
+            `SELECT * FROM personal_details WHERE user_id = $1`,
+            [userId]
+        );
+
+        return NextResponse.json({task, status: 201 });
     } catch (error) {
         return NextResponse.json({ error: 'Failed posting personal details', details: (error as Error).message }, { status: 500 });
     }
