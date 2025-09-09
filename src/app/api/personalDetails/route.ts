@@ -29,8 +29,15 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-    const body = await request.json();
-    const { user_id } = body;
+    const { searchParams } = new URL(request.url);
+    const user_id = searchParams.get('user_id');
+
+    if (!user_id) {
+        return NextResponse.json(
+            { error: 'Missing user_id query parameter' },
+            { status: 400 }
+        );
+    }
 
     try {
         const task = await pool.query(
