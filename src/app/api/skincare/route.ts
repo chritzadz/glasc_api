@@ -1,14 +1,16 @@
 import { NextResponse } from 'next/server';
+import pool from '@/app/db/db';
+import { SkincareProduct } from '@/types/skincare_product';
+
 export async function GET() {
     try {
-        const res = await fetch("https://skincare-api.herokuapp.com/products", {
-			method: "GET",
-			headers: { "Content-Type": "application/json" },
-		});
+        const result = await pool.query(
+            'SELECT * FROM products;',
+            []
+        );
 
-		const data = await res.json();
-        return NextResponse.json(data, { status: 201 });
-        
+        const existingProduct: SkincareProduct[] = result.rows;
+        return NextResponse.json(existingProduct, { status: 201 });
     } catch (error) {
         console.error('Fetch error:', error);
         return NextResponse.json({ error: 'Fail in route', details: (error as Error).message }, { status: 500 });
