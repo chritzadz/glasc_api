@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
             [product_name]
         );
 
-        const ingredients: string[] = result.rows;
+        const ingredients: string[] = result.rows.map(row => row.ingredient);;
         return NextResponse.json(ingredients, { status: 201 });
     } catch (error) {
         console.error('Fetch error:', error);
