@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/app/db/db';
+import { RoutineSkincareProduct } from '@/types/routine_skincare_product';
 
 export async function POST(request: NextRequest) {
     const body = await request.json();
@@ -47,7 +48,10 @@ export async function GET(request: NextRequest) {
             `SELECT * FROM personal_skincare_routine WHERE user_id = $1`,
             [user_id]
         );
-        return NextResponse.json({ task }, { status: 200 });
+
+        const routineProducts: RoutineSkincareProduct[] = task.rows;
+
+        return NextResponse.json({ routineProducts }, { status: 200 });
     } catch (error) {
         return NextResponse.json(
             { error: 'Failed fetching skincare routine', details: (error as Error).message },
