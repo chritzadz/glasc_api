@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const { user_id, product, type } = body;
     try {
         await pool.query(
-            'INSERT INTO personal_skincare_routine (user_id, product, type) VALUES ($1, $2, $3);',
+            'INSERT INTO routine_product (user_id, product, type) VALUES ($1, $2, $3);',
             [user_id, product, type]
         );
 
@@ -22,7 +22,7 @@ export async function DELETE(request: NextRequest) {
     const { user_id, product, type } = body;
     try {
         await pool.query(
-            'DELETE FROM personal_skincare_routine WHERE user_id = $1 AND product = $2 AND type = $3;',
+            'DELETE FROM routine_product WHERE user_id = $1 AND product = $2 AND type = $3;',
             [user_id, product, type]
         );
 
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
 
     try {
         const task = await pool.query(
-            `SELECT * FROM personal_skincare_routine WHERE user_id = $1`,
+            `SELECT * FROM routine_product WHERE user_id = $1`,
             [user_id]
         );
 
