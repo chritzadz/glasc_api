@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
 
         const routineProducts: RoutineSkincareProduct[] = task.rows;
 
-        return NextResponse.json({ routineProducts }, { status: 200 });
+        return NextResponse.json( routineProducts , { status: 200 });
     } catch (error) {
         return NextResponse.json(
             { error: 'Failed fetching skincare routine', details: (error as Error).message },
