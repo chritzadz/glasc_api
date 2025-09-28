@@ -3,7 +3,12 @@ import pool from '@/app/db/db';
 
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
-    const product_id = searchParams.get('product_id');
+    const product_id_str = searchParams.get('product_id');
+    const product_id = product_id_str ? parseInt(product_id_str, 10) : null;
+
+    if (!product_id) {
+        return NextResponse.json({ error: 'Invalid or missing product_id' }, { status: 400 });
+    }
 
     try {
         const result = await pool.query(
