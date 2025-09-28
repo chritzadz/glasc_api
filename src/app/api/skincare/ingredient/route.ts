@@ -3,13 +3,8 @@ import pool from '@/app/db/db';
 
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
-    const product_id_str = searchParams.get('product_id');
-    const product_id = product_id_str ? parseInt(product_id_str, 10) : null;
-
-    if (!product_id) {
-        return NextResponse.json({ error: 'Invalid or missing product_id' }, { status: 400 });
-    }
-
+    const product_id = searchParams.get('product_id');
+    console.log(product_id);
     try {
         const result = await pool.query(
             `SELECT i.ingredient_name FROM products p
@@ -17,10 +12,10 @@ export async function GET(request: NextRequest) {
                 INNER JOIN ingredients i USING(ingredient_id)
                 WHERE p.product_id= $1
             ;`,
-            [product_id]
+            [parseInt(product_id as string)]
         );
 
-        const ingredients: string[] = result.rows.map(row => row.ingredient);;
+        const ingredients: string[] = result.rows.map(row => row.ingredient_name);;
         return NextResponse.json(ingredients, { status: 201 });
     } catch (error) {
         console.error('Fetch error:', error);
