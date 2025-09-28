@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
             [parseInt(product_id as string)]
         );
 
-        const ingredients: string[] = result.rows.map(row => row.ingredient_name);;
+        const ingredients: string[] = result.rows.map(row => row.ingredient_name);
         return NextResponse.json(ingredients, { status: 201 });
     } catch (error) {
         console.error('Fetch error:', error);

@@ -4,11 +4,11 @@ import { RoutineSkincareProduct } from '@/types/routine_skincare_product';
 
 export async function POST(request: NextRequest) {
     const body = await request.json();
-    const { user_id, product, type } = body;
+    const { user_id, product_id, type } = body;
     try {
         await pool.query(
-            'INSERT INTO personal_skincare_routine (user_id, product, type) VALUES ($1, $2, $3);',
-            [user_id, product, type]
+            'INSERT INTO personal_skincare_routine (user_id, product_id, type) VALUES ($1, $2, $3);',
+            [user_id, product_id, type]
         );
 
         return NextResponse.json({ status: 201 });
@@ -19,11 +19,11 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
     const body = await request.json();
-    const { user_id, product, type } = body;
+    const { user_id, product_id, type } = body;
     try {
         await pool.query(
-            'DELETE FROM personal_skincare_routine WHERE user_id = $1 AND product = $2 AND type = $3;',
-            [user_id, product, type]
+            'DELETE FROM personal_skincare_routine WHERE user_id = $1 AND product_id = $2 AND type = $3;',
+            [user_id, product_id, type]
         );
 
         return NextResponse.json({ status: 201 });

@@ -1,5 +1,5 @@
 export interface RoutineSkincareProduct {
 	user_id: number;
-	product: string;
+	product_id: number;
 	type: string;
 }

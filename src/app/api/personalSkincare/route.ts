@@ -4,11 +4,11 @@ import pool from '@/app/db/db';
 
 export async function POST(request: NextRequest) {
     const body = await request.json();
-    const { user_id, product, type } = body;
+    const { user_id, product_id, type } = body;
     try {
         await pool.query(
-            'INSERT INTO routine_product (user_id, product, type) VALUES ($1, $2, $3);',
-            [user_id, product, type]
+            'INSERT INTO routine_product (user_id, product_id, type) VALUES ($1, $2, $3);',
+            [user_id, product_id, type]
         );
 
         return NextResponse.json({ status: 201 });
@@ -19,11 +19,11 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
     const body = await request.json();
-    const { user_id, product, type } = body;
+    const { user_id, product_id, type } = body;
     try {
         await pool.query(
-            'DELETE FROM routine_product WHERE user_id = $1 AND product = $2 AND type = $3;',
-            [user_id, product, type]
+            'DELETE FROM routine_product WHERE user_id = $1 AND product_id = $2 AND type = $3;',
+            [user_id, product_id, type]
         );
 
         return NextResponse.json({ status: 201 });
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
 
     try {
         const task = await pool.query(
-            `SELECT * FROM routine_product WHERE user_id = $1`,
+            `SELECT * FROM personal_skincare_routine WHERE user_id = $1`,
             [user_id]
         );
 
