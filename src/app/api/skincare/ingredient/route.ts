@@ -3,16 +3,16 @@ import pool from '@/app/db/db';
 
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
-    const product_name = searchParams.get('product_name');
+    const product_id = searchParams.get('product_id');
 
     try {
         const result = await pool.query(
             `SELECT i.ingredient_name FROM products p
                 INNER JOIN product_ingredients pi USING(product_id)
                 INNER JOIN ingredients_3 i USING(ingredient_id)
-                WHERE p.product_name = $1
+                WHERE p.product_id= $1
             ;`,
-            [product_name]
+            [product_id]
         );
 
         const ingredients: string[] = result.rows.map(row => row.ingredient);;
