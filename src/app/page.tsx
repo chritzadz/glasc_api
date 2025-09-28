@@ -2,7 +2,7 @@
 
 export default function HomePage() {
 	const handleDownload = () => {
-		const apkUrl = "";
+		const apkUrl = "/glasc_v1.0.0.apk";
 		const link = document.createElement('a');
 		link.href = apkUrl;
 		link.download = 'GlascApp.apk';
@@ -28,7 +28,7 @@ export default function HomePage() {
 					<p className="text-sm text-gray-500">Version 1.0.0</p>
 				</div>
 
-				<button 
+				<button
 					onClick={handleDownload}
 					className="w-full bg-[#B87C4C] hover:bg-[#996032] text-white font-semibold py-3 px-6 rounded-lg transition duration-200 flex items-center justify-center space-x-2"
 				>
