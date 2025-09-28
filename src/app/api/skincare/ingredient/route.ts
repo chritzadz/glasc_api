@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
         const result = await pool.query(
             `SELECT i.ingredient_name FROM products p
                 INNER JOIN product_ingredients pi USING(product_id)
-                INNER JOIN ingredients_3 i USING(ingredient_id)
+                INNER JOIN ingredients i USING(ingredient_id)
                 WHERE p.product_id= $1
             ;`,
             [product_id]
