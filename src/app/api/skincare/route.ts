@@ -14,7 +14,7 @@ export async function GET(request: Request) {
             query = 'SELECT * FROM products WHERE id = $1;';
             params = [productId];
         } else {
-            query = 'SELECT * FROM products;';
+            query = 'SELECT * FROM products LIMIT 50;';
             params = [];
         }
 
