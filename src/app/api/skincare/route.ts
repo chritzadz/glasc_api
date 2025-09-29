@@ -8,7 +8,7 @@ export async function GET(request: Request) {
         const productId = searchParams.get('product_id');
 
         let query: string;
-        let params: any[];
+        let params: (string | number | boolean | null)[];
 
         if (productId) {
             query = 'SELECT * FROM products WHERE id = $1;';
