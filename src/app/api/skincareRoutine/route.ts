@@ -45,8 +45,8 @@ export async function GET(request: NextRequest) {
 
     try {
         const task = await pool.query(
-            `SELECT psr.user_id, psr.product_id, psr.type, p.name FROM personal_skincare_routine psr
-            INNER JOIN products p ON psr.product_id = p.id
+            `SELECT psr.user_id AS user_id, psr.product_id  AS product_id, psr.type AS type, p.name AS product_name FROM personal_skincare_routine psr
+            INNER JOIN products p ON (psr.product_id = p.id)
             WHERE user_id = $1`,
             [user_id]
         );
