@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
 
     try {
         const task = await pool.query(
-            `SELECT product_name, similarity(product_name, $1) AS sim
+            `SELECT product_id, product_name, similarity(product_name, $1) AS sim
                 FROM products
                 ORDER BY sim DESC
                 LIMIT 5;`,
