@@ -11,7 +11,7 @@ export async function GET(request: Request) {
         let params: (string | number | boolean | null)[];
 
         if (productId) {
-            query = 'SELECT * FROM products WHERE id = $1;';
+            query = 'SELECT * FROM products WHERE product_id = $1;';
             params = [productId];
         } else {
             query = 'SELECT * FROM products LIMIT 50;';
