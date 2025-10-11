@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "e1a722aa-da6f-4741-b5bb-f5192eeebbe6"
+      }
+    },
+    "android": {
+      "package": "com.chritzadz.glascapi"
+    }
+  }
+}

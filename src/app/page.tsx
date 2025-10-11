@@ -2,7 +2,7 @@
 
 export default function HomePage() {
 	const handleDownload = () => {
-		const apkUrl = "/glasc_v1.0.0.apk";
+		const apkUrl = "/glasc_v1.0.1.apk";
 		const link = document.createElement('a');
 		link.href = apkUrl;
 		link.download = 'GlascApp.apk';
