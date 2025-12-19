@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { User } from '@/types/user';
-import pool from '@/app/db/db';
+import pool from "@/app/db/db";
+import { User } from "@/types/user";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
     const body = await request.json();
@@ -15,19 +15,5 @@ export async function POST(request: NextRequest) {
         return NextResponse.json(newUser, { status: 201 });
     } catch (error) {
         return NextResponse.json({ error: 'Failed to create user', details: (error as Error).message }, { status: 500 });
-    }
-}
-
-export async function GET() {
-    try {
-        const result = await pool.query(
-            'SELECT * FROM users;',
-            []
-        );
-
-        const existingUsers: User[] = result.rows;
-        return NextResponse.json(existingUsers, { status: 201 });
-    } catch (error) {
-        return NextResponse.json({ error: 'Failed to get all users', details: (error as Error).message }, { status: 500 });
     }
 }
